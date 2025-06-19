@@ -830,18 +830,30 @@ body {
         font-size: 0.95em;
     }
     
+    .filter-nav {
+        position: relative; /* Remove sticky behavior on mobile */
+        padding: 15px 0; /* Reduce padding on mobile */
+    }
+    
     .filter-nav .container {
         flex-direction: column;
         align-items: stretch;
+        gap: 15px; /* Reduce gap */
     }
     
     .filter-buttons {
         justify-content: center;
+        gap: 8px; /* Reduce gap between buttons */
+    }
+    
+    .filter-btn {
+        padding: 8px 16px; /* Smaller buttons on mobile */
+        font-size: 0.85em;
     }
     
     .search-container {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px; /* Reduce gap */
     }
     
     .search-input-wrapper {
@@ -850,11 +862,15 @@ body {
     
     .search-input {
         width: 100%;
+        padding: 10px 40px 10px 15px; /* Reduce padding */
+        font-size: 0.9em;
     }
     
     .submit-btn {
         width: 100%;
         justify-content: center;
+        padding: 10px 16px; /* Reduce padding */
+        font-size: 0.9em;
     }
     
     .gallery-grid {
