@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Displays of Malfunction💥</title>
+    <meta name="description" content="A hilarious gallery of Windows crashes, blue screens, and error messages spotted in public places">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- EmailJS for handling form submissions -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">
+                <i class="fas fa-desktop"></i>
+                Public Displays of Malfunction
+                <span class="crash-emoji">💥</span>
+            </h1>
+            <p class="hero-subtitle">
+                A hilarious collection of public crashes, messages, glitches, and other forms of computers behaving badly
+            </p>
+            
+            <!-- Stats section commented out until site grows
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number" id="totalCrashes">0</span>
+                    <span class="stat-label">Total Crashes</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="blueScreens">0</span>
+                    <span class="stat-label">Blue Screens</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="publicFails">0</span>
+                    <span class="stat-label">Public Fails</span>
+                </div>
+            </div>
+            -->
+            
+            <div class="mission-section">
+                <div class="mission-textbox">
+                    <div class="mission-preview">
+                        <p>Lest you think our computer overlords haven't already taken over, I designed this humorous installation to illustrate the uneasiness we all feel when WindowsOS (ok others too, but let's be real MOSTLY WindowsOS) crashes in public, in locations where we just don't expect to see (or for security also SHOULDN'T see?) a detailed blue or black 'screen of un-alived'. <a href="#" class="read-more-link" id="readMoreLink">Read more...</a></p>
+                    </div>
+                    <div class="mission-full" id="missionFull" style="display: none;">
+                        <p>Lest you think our computer overlords haven't already taken over, I designed this humorous installation to illustrate the uneasiness we all feel when WindowsOS (ok others too, but let's be real MOSTLY WindowsOS) crashes in public, in locations where we just don't expect to see (or for security also SHOULDN'T see?) a detailed blue or black 'screen of un-alived'.</p>
+                        <p>For the past decade and a half, when I am out and about and see them I try to remember to snap a quick photo. And now, dear viewer, I have opened my vault to share with the world! Rest assured, none of these images are AI generated. They are the real deal.</p>
+                        <p>I am also inviting you to please share experiences and photos of your own. Once I review submissions, I will post the ones I feel past the smell test. Keep it real (no AI) and keep it clean (please don't scar me for life). You can <a href="#submit" class="submit-link">SUBMIT HERE</a>. <a href="#" class="read-less-link" id="readLessLink">Read less...</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="filter-nav">
+        <div class="container">
+            <div class="filter-buttons">
+                <!-- Filter buttons will be generated dynamically by JavaScript -->
+            </div>
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <input type="text" id="searchInput" placeholder="Search crashes..." class="search-input">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <button class="submit-btn" id="submitBtn">
+                    <i class="fas fa-plus-circle"></i> Submit Your Own
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="gallery-container">
+        <div class="container">
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Images will be loaded here by JavaScript -->
+            </div>
+            
+            <div class="loading" id="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading more crashes...</p>
+            </div>
+            
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No crashes found</h3>
+                <p>Try adjusting your search or filter criteria</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for enlarged image view -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <div class="modal-location" id="modalLocation">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span></span>
+                </div>
+                <p id="modalDescription"></p>
+                <div class="modal-tags" id="modalTags"></div>
+                <div class="modal-meta">
+                    <div class="modal-year" id="modalYear">
+                        <i class="fas fa-calendar"></i>
+                        <span></span>
+                    </div>
+                    <div class="modal-credit" id="modalCredit">
+                        <i class="fas fa-camera"></i>
+                        Credit: <span></span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-secondary" id="shareBtn">
+                        <i class="fas fa-share"></i> Share
+                    </button>
+                    <button class="btn-secondary" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submission Form -->
+    <section class="submit-section" id="submit">
+        <div class="container">
+            <h2><i class="fas fa-plus-circle"></i> Submit your own 'Public Display of Malfunction'</h2>
+            <p>Spotted an instance of Windows-Gone-Wild yourself? Share it with the community!</p>
+            <form class="submit-form" id="submitForm">
+                <div class="form-group">
+                    <label for="crashTitle">Title</label>
+                    <input type="text" id="crashTitle" name="crashTitle" placeholder="e.g., 'Airport departure board showing BSOD'" required>
+                </div>
+                <div class="form-group">
+                    <label for="crashLocation">Location</label>
+                    <input type="text" id="crashLocation" name="crashLocation" placeholder="e.g., 'LAX Terminal 2'" required>
+                </div>
+                <div class="form-group">
+                    <label for="submitterName">Your Screen Name / Pseudonym</label>
+                    <input type="text" id="submitterName" name="submitterName" placeholder="e.g., 'CrashHunter2025'" required>
+                    <small class="form-help">This will be shown as photo credit on your submission</small>
+                </div>
+                <div class="form-group">
+                    <label for="crashType">Type</label>
+                    <select id="crashType" name="crashType" required>
+                        <option value="">Select crash type</option>
+                        <option value="Error Dialog">Error Dialog</option>
+                        <option value="BSOD">BSOD</option>
+                        <option value="OS">OS</option>
+                        <option value="Failed Update">Failed Update</option>
+                        <option value="Dialog">Dialog</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="crashDescription">Description</label>
+                    <textarea id="crashDescription" name="crashDescription" placeholder="Tell us about this crash..." rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="crashImage">Image Upload</label>
+                    <div class="file-upload">
+                        <input type="file" id="crashImage" name="crashImage" accept="image/*" required>
+                        <div class="file-upload-text">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Choose file or drag & drop</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-paper-plane"></i> Submit Crash
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Public Displays of Malfunction</h4>
+                    <p>Documenting the digital chaos of our modern world, one crash at a time.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#" data-filter="bsod">Blue Screens</a></li>
+                        <li><a href="#" data-filter="error">Error Messages</a></li>
+                        <li><a href="#" data-filter="update">Update Fails</a></li>
+                        <li><a href="#" data-filter="airport">Airport Displays</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Share</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-reddit"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Public Displays of Malfunction. All rights reserved. Microsoft Windows is a trademark of Microsoft Corporation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS for form submissions -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Fallback EMAIL_CONFIG in case external file doesn't load
+        window.EMAIL_CONFIG = window.EMAIL_CONFIG || {
+            recipientEmail: 'lroberts1212@yahoo.com',
+            emailjs: {
+                serviceId: 'service_o88av9n',
+                templateId: 'template_6upa2im', 
+                publicKey: 'izirukalafulwhfh'
+            }
+        };
+    </script>
+    <script src="email-config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
