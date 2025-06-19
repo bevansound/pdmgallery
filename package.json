@@ -1,0 +1,24 @@
+{
+  "name": "windows-crashing-public",
+  "version": "1.0.0",
+  "description": "A gallery of Windows crashes and errors spotted in public places",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx http-server public -p 3000 -o",
+    "dev": "npx live-server public --port=3000"
+  },
+  "keywords": [
+    "windows",
+    "crashes",
+    "public",
+    "gallery",
+    "funny",
+    "errors"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  }
+}
